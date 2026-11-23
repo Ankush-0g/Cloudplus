@@ -1,6 +1,6 @@
 # CloudPulse: Cloud Server Health Monitor Simulator
 
-Python (Flask + random) backend, plain HTML/CSS/JS frontend (no build tools, no CDN).
+A Python Flask-based cloud server health monitoring simulator. It generates CPU usage data for three servers across 24 time steps by default, detects high CPU usage (80% and above), and visualizes performance in an interactive dashboard. The project also includes an optional Matplotlib CLI chart. The frontend is plain HTML/CSS/JS with no build tools or CDN.
 
 ## Run
 ```
