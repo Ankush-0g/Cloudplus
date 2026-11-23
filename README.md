@@ -1,33 +1,32 @@
-# CloudPulse: Cloud Server Health Monitor Simulator
+# CloudPulse — Cloud Server Health Monitor Simulator
 
-A Python Flask-based cloud server health monitoring simulator. It generates CPU usage data for three servers across 24 time steps by default, detects high CPU usage (80% and above), and visualizes performance in an interactive dashboard. The project also includes an optional Matplotlib CLI chart. The frontend is plain HTML/CSS/JS with no build tools or CDN.
+[![Python](https://img.shields.io/badge/Python-3.x-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![Flask](https://img.shields.io/badge/Flask-3.x-000000?logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
+[![HTML5](https://img.shields.io/badge/HTML5-Plain-E34F26?logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
+[![CSS3](https://img.shields.io/badge/CSS3-Responsive%20UI-1572B6?logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
+[![JavaScript](https://img.shields.io/badge/JavaScript-Vanilla%20ES6+-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![Matplotlib](https://img.shields.io/badge/Matplotlib-CLI%20Charts-11557C?logo=plotly&logoColor=white)](https://matplotlib.org/)
 
-## Run
-```
+A cloud server health monitoring simulator built with **Python** and **Flask** on the backend, paired with a zero-dependency **HTML, CSS, and JavaScript** frontend. By default, it simulates CPU utilization across **3 servers** over **24 time steps**, flags readings at or above an **80% threshold**, supports load pattern presets and manual spike injection, and renders live telemetry in an interactive light/dark dashboard—alongside an optional **Matplotlib** CLI chart.
+
+---
+
+## Tech Stack
+
+| Layer | Technology | Role in CloudPulse |
+| :--- | :--- | :--- |
+| **Backend API** | **Python & Flask** | Serves static frontend files and exposes JSON REST endpoints (`/api/*`) |
+| **Simulation Engine** | **Python (`random` + OOP)** | Generates server CPU time series, load patterns, spike overrides, and threshold alerts |
+| **Frontend UI** | **HTML5, CSS3, Vanilla JS** | Renders controls, KPIs, SVG telemetry chart, server cards, alert log, and theme toggle (no build tools or CDN) |
+| **CLI Visualization** | **Matplotlib** | Optional standalone script (`plot_cli.py`) for plotting simulation runs locally |
+
+---
+
+## Quick Start (Local)
+
+```bash
 cd backend
 python -m venv venv
 # Windows: venv\Scripts\activate     macOS/Linux: source venv/bin/activate
 pip install -r requirements.txt
 python app.py
-```
-Open http://127.0.0.1:5000
-
-## Deploy on Render
-1. Push this repository to GitHub.
-2. In Render, choose **New +** → **Blueprint** and connect the GitHub repository.
-3. Render will read `render.yaml`, install the backend dependencies, and start the Flask app with Gunicorn.
-4. Open the generated `onrender.com` URL. The `/api/state` health check confirms the service is responding.
-
-The simulation runs in memory, so its state resets when the Render service restarts. It does not require a database or environment secrets.
-
-## Optional: original Matplotlib version
-```
-cd backend
-python plot_cli.py
-```
-
-## Structure
-- backend/simulator.py  random CPU data, patterns, threshold alarms
-- backend/app.py        Flask API (/api/state, /api/config, /api/tick, /api/spike/<id>, /api/reset)
-- backend/plot_cli.py   Matplotlib version of the same simulation
-- frontend/             responsive dashboard with persistent light/dark themes, simulation controls, telemetry chart, and alert history
