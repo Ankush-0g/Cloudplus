@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: cloudpulse
+    runtime: python
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: gunicorn --chdir backend app:app
+    healthCheckPath: /api/state
